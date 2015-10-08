@@ -16,22 +16,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"1.%f秒後にアラームが鳴るらしい", self.countdown);
     // Do any additional setup after loading the view.
+    
+    //Slider
+    slider.maximumValue = 20000.0f;
+    slider.minimumValue = 0.0f;
+    slider.value = 10000.0f;
+    int number = (int)slider.value;
+//    label.text = [NSString stringWithFormat:@"%d", number];
+    NSLog(@"周波数は%d",number);
+//
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//        // 遷移ロジック
+//    });
+}
+
+- (IBAction)changeFrequency:(UISlider *)sender
+{
+    //周波数（音程）
+    self.frequency = sender.value;
+    label.text = [NSString stringWithFormat:@"%.1f", self.frequency];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    NSLog(@"%f秒後にアラームが鳴るらしい",*(self.countdown));
+    NSLog(@"2.%f秒後にアラームが鳴るらしい", self.countdown);
     [super viewDidAppear:animated];
     
-    NSTimer *alermCount = [NSTimer scheduledTimerWithTimeInterval:*(self.countdown)
+    NSTimer *alermCount = [NSTimer scheduledTimerWithTimeInterval: 1.0
                                                   target:self
                                                 selector:@selector(timeAlerm)
                                                 userInfo:nil
                                                  repeats:YES];
+    [alermCount fire];
 }
 
 -(void)timeAlerm{
+    
     self.countdown -= 1;
+    NSLog(@"countdown == %f", self.countdown);
+//    NSString *str = [self.countdown isValid] ? @"yes" : @"no";
+    
     if ((self.countdown = 0)) {
         if (!aU) {
             //Sampling rate

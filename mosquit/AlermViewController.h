@@ -33,6 +33,6 @@ static OSStatus renderer(void *inRef,
 
 
 
-@property (nonatomic,assign)double *countdown;
+@property (nonatomic,assign)double countdown;
 
 @end

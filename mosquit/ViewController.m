@@ -68,9 +68,10 @@
     NSLog(@"現在時刻：%f",[self getNowUnixTime]);
     NSLog(@"セット時刻：%f",[self getSetUnixTime]);
     NSLog(@"%f秒後にアラーム",countdown);
-    if (countdown<0) {
-        countdown = countdown + 86400;
-    }
+    
+//    if (countdown<0) {
+//        countdown = countdown + 86400;
+//    }
     
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     // 5分後に通知をする（設定は秒単位）
@@ -93,7 +94,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"set"]) {
         AlermViewController *alermView = [segue destinationViewController];
-        alermView.countdown = &(countdown);
+        alermView.countdown = countdown;
     }
 }
 
